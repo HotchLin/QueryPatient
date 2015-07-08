@@ -12,8 +12,8 @@
 	<script src="./javascripts/jquery-1.9.1.min.js"></script>
 	<script src="./javascripts/bootstrap.min.js"></script>
 	<script src="./javascripts/angular.js"></script>
+	<script src="./javascripts/ui-bootstrap-tpls-0.13.0.min.js"></script>
 	<script src="./javascripts/app.js"></script>
-	
 </head>
 <body ng-app='myApp' ng-controller="patientCtrl">
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -62,7 +62,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="patient in patients | filter:searchText">
+					<tr ng-repeat="patient in filteredPatients | filter:searchText">
 						<td>{{patient['編號']}}</td>
 						<td>{{patient['縣市別']}}</td>
 						<td>{{patient['收治單位']}}</td>
@@ -79,6 +79,12 @@
 					</tr>
 				</tbody>
 			</table>
+			<pagination boundary-links="true"
+						max-size="10"
+						items-per-page="itemsPerPage"
+						total-items="patients.length"
+						ng-model="currentPage"
+						ng-change="pageChanged()"></pagination>
 		</div>
 		<hr />
 		<footer>
